@@ -1,0 +1,38 @@
+# do not modify these
+root: ./
+name: rosbag
+socket_name: mrs
+attach: false
+tmux_options: -f /etc/ctu-mrs/tmux.conf
+# you can modify these
+pre_window: export UAV_NAME=uav1; export RUN_TYPE=realworld; export UAV_TYPE=x500
+startup_window: rosbag
+windows:
+  - roscore:
+      layout: tiled
+      panes:
+        - roscore
+  - rosbag:
+      layout: tiled
+      panes:
+        - waitForRos; cd ~/bag_files/camp_april_2024/latest/; rosbag play _2024-04-16-13-59-02.bag --clock
+  - core:
+      layout: tiled
+      panes:
+        - waitForHw; rosparam set use_sim_time true; roslaunch mrs_point_lio_core rosbag_core.launch
+          platform_config:=`rospack find mrs_uav_gazebo_simulation`/config/mrs_uav_system/$UAV_TYPE.yaml
+          custom_config:=`rospack find mrs_point_lio_estimator_plugin`/custom_configs/mrs_uav_managers.yaml
+          world_config:=./custom_configs/world_config.yaml
+          network_config:=./custom_configs/network_config.yaml
+  - republish:
+      layout: tiled
+      panes:
+        - waitForRos; rosrun topic_tools relay /aft_mapped_to_init $UAV_NAME/point_lio/aft_mapped_to_init
+  - rviz:
+      layout: tiled
+      panes:
+        - waitForControl; roslaunch mrs_point_lio_core rviz.launch
+  - layout:
+      layout: tiled
+      panes:
+        - waitForControl; sleep 3; ~/.i3/layout_manager.sh ./layout.json
