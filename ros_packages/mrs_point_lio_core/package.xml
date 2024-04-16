@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="2">
+
+  <name>mrs_point_lio_core</name>
+  <version>1.0.0</version>
+  <description>The MRS Point-LIO core metapackage</description>
+
+  <author email="matej.petrlik@fel.cvut.cz">Matej Petrlik</author>
+  <maintainer email="matej.petrlik@fel.cvut.cz">Matej Petrlik</maintainer>
+
+  <license>BSD 3-Clause</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>cmake_modules</depend>
+
+  <depend>mrs_point_lio_estimator_plugin</depend>
+
+</package>
