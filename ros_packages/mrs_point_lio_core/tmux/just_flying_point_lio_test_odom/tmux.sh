@@ -51,6 +51,8 @@ input=(
 '
   'SLAM' 'waitForRos; roslaunch point_lio mapping_mid360.launch
 '
+  'Trajectory' 'history -s rosservice call /'"$UAV_NAME"'/control_manager/stop_trajectory_tracking; history -s rosservice call /$UAV_NAME/control_manager/start_trajectory_tracking; rosservice call /'"$UAV_NAME"'/control_manager/goto_trajectory_start; history -s roslaunch mrs_uav_trajectory_loader load.launch config:=./config/trajectory_config.yaml path:=./config/trajectory_point_lio.txt;
+'
 # do NOT modify the command list below
   'EstimDiag' 'waitForHw; rostopic echo /'"$UAV_NAME"'/estimation_manager/diagnostics
 '
