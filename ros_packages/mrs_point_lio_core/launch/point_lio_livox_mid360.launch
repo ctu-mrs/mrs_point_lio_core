@@ -1,0 +1,11 @@
+<launch>
+
+  <include file="$(find livox_ros_driver2)/launch_ROS1/mid360.launch">
+    <arg name="xfer_format" value="1" />
+  </include>
+
+  <include file="$(find point_lio)/launch/mid360.launch">
+    <arg name="rviz" value="false" />
+  </include>
+
+</launch>
