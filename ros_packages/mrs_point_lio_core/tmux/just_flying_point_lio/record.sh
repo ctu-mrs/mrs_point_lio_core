@@ -24,7 +24,7 @@ exclude=(
 # '(.*)theora(.*)'
 # Every topic containing "h264"
 # '(.*)h264(.*)'
-'(.*)Laser_map'
+'(.*)laser_map'
 '(.*)cloud_registered_body'
 '(.*)cloud_effected'
 )
