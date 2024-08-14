@@ -39,7 +39,7 @@ Launch the driver and Point-LIO separately
 
 ```bash
 roslaunch livox_ros_driver2 mid360.launch xfer_format:=1  # Livox MID360 driver
-roslaunch point_lio mid360.launch rviz:= false            # Point-LIO
+roslaunch point_lio mid360.launch rviz:=false             # Point-LIO
 ```
 
 or use the prepared launch file for both at once

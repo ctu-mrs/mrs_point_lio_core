@@ -4,6 +4,7 @@ sources:
     name: point_lio
     rev: master
     type: git
+    params:
     sparse_paths:
       -
     links:
@@ -11,21 +12,11 @@ sources:
         target: ros_packages/point_lio
     scripts:
       - git submodule update --init --recursive
-  - repo: https://github.com/ctu-mrs/livox_ros_driver2.git
-    name: livox_ros_driver2
-    rev: master
-    type: git
-    sparse_paths:
-      -
-    links:
-      - source: ''
-        target: ros_packages/livox_ros_driver2
-    scripts:
-      - git submodule update --init --recursive
   - repo: https://github.com/ctu-mrs/mrs_point_lio_estimator_plugin
     name: mrs_point_lio_estimator_plugin
     rev: master
     type: git
+    params:
     sparse_paths:
       -
     links:
@@ -38,6 +29,7 @@ sources_locked:
     name: point_lio
     rev: a44d31ae46efc344cfb83cb8662d17557fa9d913
     type: git
+    params:
     sparse_paths:
       -
     links:
@@ -45,21 +37,11 @@ sources_locked:
         target: ros_packages/point_lio
     scripts:
       - git submodule update --init --recursive
-  - repo: https://github.com/ctu-mrs/livox_ros_driver2.git
-    name: livox_ros_driver2
-    rev: 4a29b16b09401bdac4a8ba992ae65c4c9e93fea5
-    type: git
-    sparse_paths:
-      -
-    links:
-      - source: ''
-        target: ros_packages/livox_ros_driver2
-    scripts:
-      - git submodule update --init --recursive
   - repo: https://github.com/ctu-mrs/mrs_point_lio_estimator_plugin
     name: mrs_point_lio_estimator_plugin
     rev: 44c36f7a05f5f74aa1ad9c881be9adcdc89f195a
     type: git
+    params:
     sparse_paths:
       -
     links:
