@@ -7,7 +7,6 @@ Metapackage containing submodules, launch files, config files, scripts, and othe
 | Repository                                                                                  |
 |---------------------------------------------------------------------------------------------|
 | [mrs_point_lio_estimator_plugin](https://github.com/ctu-mrs/mrs_point_lio_estimator_plugin) |
-| [livox_ros_driver2](https://github.com/ctu-mrs/livox_ros_driver2)                           |
 | [Point-LIO](https://github.com/ctu-mrs/Point-LIO)                                           |
 
 ## Installation
@@ -19,6 +18,7 @@ MODULES_WORKSPACE=$HOME/modules_workspace
 cd $HOME/git && git clone git@github.com:ctu-mrs/mrs_uav_modules.git
 mkdir -p $MODULES_WORKSPACE/src && cd $MODULES_WORKSPACE/src && ln -sf $HOME/git/mrs_uav_modules .
 cd mrs_uav_modules && git pull && gitman update
+cd ros_packages/mrs_pcl_tools && git checkout livox && git pull # TODO: remove this step once livox_ros_driver2 is deployed as a deb pkg
 
 cd $MODULES_WORKSPACE && catkin init
 catkin config --profile reldeb --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
