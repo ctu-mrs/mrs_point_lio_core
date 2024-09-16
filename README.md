@@ -68,6 +68,7 @@ roslaunch mrs_point_lio_core point_lio_livox_mid360.launch
 
 ## TODOs
 
+  * [ ] Simplify install instructions for `mrs_uav_modules` once `livox_ros_driver2` is installed as part of `mrs_uav_modules`.
   * [ ] Automatize IP address deduction from env variables
   * [ ] Nodeletize and run under one nodelet manager:
     * [ ] livox_ros_driver2
