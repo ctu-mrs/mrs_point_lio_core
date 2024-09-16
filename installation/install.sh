@@ -28,4 +28,5 @@ git pull
 gitman update
 
 # Install Livox SDK2
-bash $SCRIPT_PATH/../ros_packages/livox_ros_driver2/installation/install.sh ROS1
+cd $HOME/git/mrs_uav_modules/ros_packages/livox_ros_driver2/installation && ./install.sh ROS1
+# bash $SCRIPT_PATH/../ros_packages/livox_ros_driver2/installation/install.sh ROS1

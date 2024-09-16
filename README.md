@@ -11,17 +11,36 @@ Metapackage containing submodules, launch files, config files, scripts, and othe
 | [Point-LIO](https://github.com/ctu-mrs/Point-LIO)                                           |
 
 ## Installation
-Install prerequisities for your `ROS_VERSION` and link to your `WORKSPACE`
-```bash
-WORKSPACE=$HOME/workspace
-ROS_VERSION=ROS1 # (ROS1, ROS2)
 
-cd $HOME/git && git clone git@github.com:ctu-mrs/mrs_point_lio_core.git
-cd $HOME/git/mrs_point_lio_core/installation && ./install.sh
-cd $WORKSPACE/src && ln -sf ~/git/mrs_point_lio_core .
+I) Install [`ctu-mrs/mrs_uav_modules`](https://github.com/ctu-mrs/mrs_uav_modules) (beware: will be used instead of `ros-noetic-mrs-uav-modules` package if installed)
+```bash
+MODULES_WORKSPACE=$HOME/modules_workspace
+
+cd $HOME/git && git clone git@github.com:ctu-mrs/mrs_uav_modules.git
+mkdir -p $MODULES_WORKSPACE/src && cd $MODULES_WORKSPACE/src && ln -sf $HOME/git/mrs_uav_modules .
+cd mrs_uav_modules && git pull && gitman update
+
+cd $MODULES_WORKSPACE && catkin init
+catkin config --profile reldeb --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+catkin config --extend /opt/ros/noetic
+catkin build
 ```
 
-And **manually** set the IP of your Livox MID360 in `livox_ros_driver2/config/MID360_config.json`. How to find the IP of the sensor is written [here](https://github.com/ctu-mrs/livox_ros_driver2/tree/master).
+II) Install [`ctu-mrs/mrs_point_lio_core`](git@github.com:ctu-mrs/mrs_point_lio_core.git)
+```bash
+WORKSPACE=$HOME/indair_workspace
+
+cd $HOME/git && git clone git@github.com:ctu-mrs/mrs_point_lio_core.git
+mkdir -p $WORKSPACE/src && cd $WORKSPACE/src && ln -sf $HOME/git/mrs_point_lio_core .
+cd $HOME/git/mrs_point_lio_core/installation && ./install.sh
+
+cd $WORKSPACE && catkin init
+catkin config --profile reldeb --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+catkin config --extend $MODULES_WORKSPACE/devel # important to extend the modules workspace!
+source $MODULES_WORKSPACE/devel/setup.sh && catkin build
+```
+
+And **manually** set the IP of your Livox MID360 in `livox_ros_driver2/config/MID360_config.json`. How to find the IP of the sensor is written [here](https://github.com/ctu-mrs/livox_ros_driver2/tree/master?tab=readme-ov-file#set-up-your-livox-sensor).
 
 **Note 1:** do not forget to source your `WORKSPACE` in your `.*rc` file.
 
