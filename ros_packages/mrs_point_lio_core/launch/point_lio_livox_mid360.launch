@@ -1,6 +1,6 @@
 <launch>
 
-  <include file="$(find livox_ros_driver2)/launch_ROS1/mid360.launch">
+  <include file="$(find livox_ros_driver2)/launch/mid360.launch">
     <arg name="xfer_format" value="1" />
   </include>
 
