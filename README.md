@@ -16,6 +16,8 @@ I) Install [`ctu-mrs/mrs_uav_modules`](https://github.com/ctu-mrs/mrs_uav_module
 MODULES_WORKSPACE=$HOME/modules_workspace
 
 cd $HOME/git && git clone git@github.com:ctu-mrs/mrs_uav_modules.git
+cd $HOME/git/mrs_uav_modules
+git pull && gitman update
 mkdir -p $MODULES_WORKSPACE/src && cd $MODULES_WORKSPACE/src && ln -sf $HOME/git/mrs_uav_modules .
 cd mrs_uav_modules && git pull && gitman update
 cd ros_packages/mrs_pcl_tools && git checkout livox && git pull # TODO: remove this step once livox_ros_driver2 is deployed as a deb pkg
@@ -31,6 +33,8 @@ II) Install [`ctu-mrs/mrs_point_lio_core`](git@github.com:ctu-mrs/mrs_point_lio_
 WORKSPACE=$HOME/indair_workspace
 
 cd $HOME/git && git clone git@github.com:ctu-mrs/mrs_point_lio_core.git
+cd $HOME/git/mrs_point_lio_core
+git pull && gitman update
 mkdir -p $WORKSPACE/src && cd $WORKSPACE/src && ln -sf $HOME/git/mrs_point_lio_core .
 cd $HOME/git/mrs_point_lio_core/installation && ./install.sh
 
