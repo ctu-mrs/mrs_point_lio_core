@@ -3,13 +3,11 @@ mrs_uav_managers:
   uav_manager:
     takeoff:
       after_takeoff:
-        controller: "Se3Controller"
+        controller: "MpcController"
 
   estimation_manager:
 
     state_estimators: [
-     "gps_garmin",
-     #"rtk",
      "point_lio"
     ]
 
@@ -64,7 +62,7 @@ mrs_uav_managers:
   
         process_noise: # process noise covariance (Q)
           pos: 1.0 # position state
-          vel: 100.0 # velocity state
+          vel: 10.0 # velocity state
           acc: 100.0 # acceleration state
   
         corrections: [
@@ -82,7 +80,11 @@ mrs_uav_managers:
             limit: 
               delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
               time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
-  
+          transform:
+            enabled: true
+            from_frame: "livox"
+            to_frame: "fcu" 
+
           processors: [] # types of processors attached to this measurement
 
         vel_hw_api:
@@ -131,6 +133,10 @@ mrs_uav_managers:
             limit: 
               delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
               time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
+          transform:
+            enabled: true
+            from_frame: "livox"
+            to_frame: "fcu" 
 
           processors: [] # types of processors attached to this measurement
 
@@ -168,6 +174,10 @@ mrs_uav_managers:
             limit: 
               delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
               time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
+          transform:
+            enabled: true
+            from_frame: "livox"
+            to_frame: "fcu" 
 
           processors: [] # types of processors attached to this measurement
 

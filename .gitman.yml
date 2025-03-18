@@ -27,7 +27,7 @@ sources:
 sources_locked:
   - repo: https://github.com/ctu-mrs/Point-LIO
     name: point_lio
-    rev: 46d0db70e43fda396a691677ac6882dd79e2946f
+    rev: f397ab55a1d9aadfcc02931cc87b55f1e74415b3
     type: git
     params:
     sparse_paths:
