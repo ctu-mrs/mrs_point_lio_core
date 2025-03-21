@@ -24,6 +24,19 @@ sources:
         target: ros_packages/mrs_point_lio_estimator_plugin
     scripts:
       - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/livox_ros_driver2.git
+    name: livox_ros_driver2
+    rev: local-sdk-install
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      - source: ''
+        target: ros_packages/livox_ros_driver2
+    scripts:
+      - git submodule update --init --recursive
+      - cd installation && ./install.sh ROS1
 sources_locked:
   - repo: https://github.com/ctu-mrs/Point-LIO
     name: point_lio
