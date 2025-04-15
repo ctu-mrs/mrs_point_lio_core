@@ -59,7 +59,7 @@ sources_locked:
       - git submodule update --init --recursive
   - repo: git@github.com:ctu-mrs/livox_ros_driver2.git
     name: livox_ros_driver2
-    rev: d96690793054db8f1153d0bda0cba2d6f0f915ee
+    rev: baf0202e6246489607e05aa6dc14904d3bd6502a
     type: git
     sparse_paths:
       -

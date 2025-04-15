@@ -66,8 +66,7 @@ mrs_uav_managers:
           acc: 100.0 # acceleration state
   
         corrections: [
-          "pos_point_lio",
-          "vel_hw_api"
+          "pos_point_lio"
         ]
   
         pos_point_lio:
