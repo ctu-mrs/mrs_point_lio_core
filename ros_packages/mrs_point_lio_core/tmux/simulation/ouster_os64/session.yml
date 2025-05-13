@@ -24,7 +24,7 @@ windows:
   - spawn:
       layout: tiled
       panes:
-        - waitForGazebo; rosservice call /mrs_drone_spawner/spawn "1 $UAV_TYPE --enable-ground-truth --enable-ouster model:=OS0-32 horizontal_samples:=1024 use_gpu:=True --pos 0 0 0 0"
+        - waitForGazebo; rosservice call /mrs_drone_spawner/spawn "1 $UAV_TYPE --enable-ground-truth --enable-ouster model:=OS0-64 horizontal_samples:=1024 use_gpu:=True --pos 0 0 0 0"
   - hw_api:
       layout: tiled
       panes:
@@ -34,13 +34,13 @@ windows:
       panes:
         - waitForHw; roslaunch mrs_uav_core core.launch
           platform_config:=`rospack find mrs_uav_gazebo_simulation`/config/mrs_uav_system/$UAV_TYPE.yaml
-          custom_config:=`rospack find mrs_point_lio_estimator_plugin`/custom_configs/mrs_uav_managers.yaml
+          custom_config:=./custom_configs/custom_config.yaml
           world_config:=./custom_configs/world_config.yaml
           network_config:=./custom_configs/network_config.yaml
   - slam:
       layout: tiled
       panes:
-        - waitForHw; roslaunch mrs_aloam_core slam_pipeline.launch
+        - waitForHw; roslaunch mrs_point_lio_core point_lio_gazebo_os64.launch custom_config:=./custom_configs/point_lio_os64.yaml
   - takeoff:
       layout: tiled
       panes:
