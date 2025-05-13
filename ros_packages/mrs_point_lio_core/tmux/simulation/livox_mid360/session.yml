@@ -1,0 +1,67 @@
+# do not modify these
+root: ./
+name: simulation
+socket_name: mrs
+attach: false
+tmux_options: -f /etc/ctu-mrs/tmux.conf
+# you can modify these
+pre_window: export UAV_NAME=uav1; export RUN_TYPE=simulation; export UAV_TYPE=x500
+startup_window: status
+windows:
+  - roscore:
+      layout: tiled
+      panes:
+        - roscore
+  - gazebo:
+      layout: tiled
+      panes:
+        - waitForRos; roslaunch mrs_uav_gazebo_simulation simulation.launch world_name:=forest gui:=true 
+          spawner_config:=./custom_configs/spawner_config.yaml
+        - waitForControl; gz camera -c gzclient_camera -f $UAV_NAME; history -s gz camera -c gzclient_camera -f $UAV_NAME
+  - status:
+      layout: tiled
+      panes:
+        - waitForHw; roslaunch mrs_uav_status status.launch
+  - spawn:
+      layout: tiled
+      panes:
+        - waitForGazebo; rosservice call /mrs_drone_spawner/spawn "1 x500_mid360 --enable-ground-truth --pos 0 0 0 0"
+  - hw_api:
+      layout: tiled
+      panes:
+        - waitForTime; roslaunch mrs_uav_px4_api api.launch
+  - core:
+      layout: tiled
+      panes:
+        - waitForHw; roslaunch mrs_uav_core core.launch
+          platform_config:=`rospack find mrs_uav_gazebo_simulation`/config/mrs_uav_system/$UAV_TYPE.yaml
+          custom_config:=./custom_configs/custom_config.yaml
+          world_config:=./custom_configs/world_config.yaml
+          network_config:=./custom_configs/network_config.yaml
+  - slam:
+      layout: tiled
+      panes:
+        - waitForHw; roslaunch mrs_point_lio_core point_lio_gazebo_mid360.launch custom_config:=./custom_configs/point_lio_mid360.yaml
+  - livox_tf:
+      layout: tiled
+      panes:
+        - waitForHw; rosrun tf2_ros static_transform_publisher 0 0 0.2 0 0 0 $UAV_NAME/fcu $UAV_NAME/livox
+  - takeoff:
+      layout: tiled
+      panes:
+        - waitForHw; roslaunch mrs_uav_autostart automatic_start.launch
+        - 'waitForControl; rosservice call /$UAV_NAME/hw_api/arming 1; sleep 2; rosservice call /$UAV_NAME/hw_api/offboard'
+  - goto:
+      layout: tiled
+      panes:
+        - 'history -s rosservice call /$UAV_NAME/control_manager/goto \"goal: \[0.0, 10.0, 1.5, 0.0\]\"'
+  - rviz:
+      layout: tiled
+      panes:
+        - waitForControl; roslaunch mrs_aloam_core rviz.launch
+        - waitForControl; roslaunch mrs_rviz_plugins load_robot.launch
+        - waitForTime; waitForControl; roslaunch mrs_rviz_plugins rviz_interface.launch
+  - layout:
+      layout: tiled
+      panes:
+        - waitForControl; sleep 3; ~/.i3/layout_manager.sh ./layout.json

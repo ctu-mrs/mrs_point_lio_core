@@ -1,0 +1,76 @@
+<launch>
+  <!-- Launch file for Ouster OS2-64 LiDAR -->
+
+  <arg name="UAV_NAME"    default="$(env UAV_NAME)" />
+  <arg name="rviz"        default="false" />
+
+  <arg name="standalone"     default="true" />
+  <arg name="debug"          default="false" />
+  <arg name="custom_config"  default="" />
+  <arg name="node_name"      default="point_lio" />
+  <arg name="name_postfix"   default="" />
+
+  <!-- Debug? -->
+  <arg     if="$(arg debug)" name="launch_prefix" value="valgrind --tool=callgrind" />
+  <arg unless="$(arg debug)" name="launch_prefix" value="" />
+
+  <!-- Standalone? -->
+  <arg if="$(eval arg('standalone') or arg('debug'))" name="nodelet" value="standalone" />
+  <arg if="$(eval arg('standalone') or arg('debug'))" name="nodelet_manager" value="" />
+
+  <!-- Nodeleted? -->
+  <arg name="nodelet_manager_name" default="$(arg UAV_NAME)_point_lio_nodelet_manager" />
+  <arg if="$(eval not arg('standalone') and not arg('debug'))" name="nodelet" value="load" />
+  <arg if="$(eval not arg('standalone') and not arg('debug'))" name="nodelet_manager" value="$(arg nodelet_manager_name)" />
+
+  <!-- Postfix? -->
+  <arg     if="$(eval arg('name_postfix') == '')" name="nodelet_name" value="$(arg node_name)" />
+  <arg unless="$(eval arg('name_postfix') == '')" name="nodelet_name" value="$(arg node_name)_$(arg name_postfix)" />
+
+  <group ns="$(arg UAV_NAME)">
+
+    <node pkg="point_lio" type="pointlio_mapping" name="$(arg node_name)" output="screen" launch-prefix="$(arg launch_prefix)">
+
+    	<rosparam if="$(eval not arg('custom_config') == '')" file="$(arg custom_config)" command="load" />
+
+    	<!-- ======================= parameters ======================= -->
+      <param name="uav_name" type="string" value="$(arg UAV_NAME)"/>
+      <param name="use_imu_as_input" type="bool" value="0"/> <!--change to 1 to use IMU as input of Point-LIO-->
+      <param name="prop_at_freq_of_imu" type="bool" value="1"/>
+      <param name="check_satu" type="bool" value="1"/>
+      <param name="init_map_size" type="int" value="10"/>
+      <param name="point_filter_num" type="int" value="4"/> <!--4, 3--> 
+      <param name="space_down_sample" type="bool" value="1" />  
+      <param name="filter_size_surf" type="double" value="0.5" /> <!--0.5, 0.3, 0.2, 0.15, 0.1--> 
+      <param name="filter_size_map" type="double" value="0.5" /> <!--0.5, 0.3, 0.15, 0.1-->
+      <param name="cube_side_length" type="double" value="1000" /> <!--2000-->
+      <param name="runtime_pos_log_enable" type="bool" value="0" /> <!--1-->
+
+    	<!-- ================== filtration parameters ================= -->
+    	<!-- <param name="space_down_sample"      type="bool"   value="1" />   -->
+  		<!-- <param name="point_filter_num"       type="int"    value="1"/> 4, 3  -->
+    	<!-- <param name="filter_size_surf"       type="double" value="0.3" /> 0.5, 0.3, 0.2, 0.15, 0.1  -->
+    	<!-- <param name="filter_size_map"        type="double" value="0.2" /> 0.5, 0.3, 0.15, 0.1 -->
+      
+      <!-- ======================= subscribers ====================== -->
+      <remap from="/livox/lidar" to="/$(arg UAV_NAME)/livox/points" />
+      <remap from="/livox/imu" to="/$(arg UAV_NAME)/livox/imu" />
+
+      <!-- ======================= publishers ======================= -->
+      <remap from="/cloud_registered" to="~cloud_registered" />
+      <remap from="/cloud_registered_body" to="~cloud_registered_body" />
+      <remap from="/cloud_effected" to="~cloud_effected" />
+      <remap from="/Laser_map" to="~laser_map" />
+      <remap from="/aft_mapped_to_init" to="~odom" />
+      <remap from="/path" to="~path" />
+      <remap from="/planner_normal" to="~planner_normal" />
+
+	</node>
+  
+  </group>
+
+  <group if="$(arg rviz)">
+    <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find point_lio)/rviz/point_lio.rviz" />
+  </group>
+
+</launch>

@@ -79,3 +79,4 @@ roslaunch mrs_point_lio_core point_lio_livox_mid360.launch
     * [ ] Point-LIO
   * [ ] Make the custom msg format of livox_ros_driver2 visualizable in RViz
   * [ ] Lower the terminal spamming of the nodes and normalize their naming to improve clarity
+  * [ ] Remove gazebo simulation files (`models/`, `ROMFS/`) once mid360 sensor is integrated into `mrs_uav_simulation`

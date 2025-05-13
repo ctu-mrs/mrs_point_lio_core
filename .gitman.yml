@@ -4,6 +4,7 @@ sources:
     name: point_lio
     rev: master
     type: git
+    params:
     sparse_paths:
       -
     links:
@@ -15,6 +16,7 @@ sources:
     name: mrs_point_lio_estimator_plugin
     rev: master
     type: git
+    params:
     sparse_paths:
       -
     links:
@@ -26,6 +28,7 @@ sources:
     name: livox_ros_driver2
     rev: master
     type: git
+    params:
     sparse_paths:
       -
     links:
@@ -34,41 +37,18 @@ sources:
     scripts:
       - git submodule update --init --recursive
       - cd installation && ./install.sh ROS1
-sources_locked:
-  - repo: https://github.com/ctu-mrs/Point-LIO
-    name: point_lio
-    rev: 1de861111ee1f27abce8c0df6702941ad1546b70
+  - repo: https://github.com/ctu-mrs/Mid360_simulation_plugin
+    name: Mid360_simulation_plugin
+    rev: refactoring
     type: git
+    params:
     sparse_paths:
       -
     links:
       - source: ''
-        target: ros_packages/point_lio
+        target: ros_packages/Mid360_simulation_plugin
     scripts:
       - git submodule update --init --recursive
-  - repo: https://github.com/ctu-mrs/mrs_point_lio_estimator_plugin
-    name: mrs_point_lio_estimator_plugin
-    rev: 44c36f7a05f5f74aa1ad9c881be9adcdc89f195a
-    type: git
-    sparse_paths:
-      -
-    links:
-      - source: ''
-        target: ros_packages/mrs_point_lio_estimator_plugin
-    scripts:
-      - git submodule update --init --recursive
-  - repo: git@github.com:ctu-mrs/livox_ros_driver2.git
-    name: livox_ros_driver2
-    rev: baf0202e6246489607e05aa6dc14904d3bd6502a
-    type: git
-    sparse_paths:
-      -
-    links:
-      - source: ''
-        target: ros_packages/livox_ros_driver2
-    scripts:
-      - git submodule update --init --recursive
-      - cd installation && ./install.sh ROS1
 default_group: ''
 groups:
   -

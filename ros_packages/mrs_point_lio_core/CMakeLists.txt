@@ -13,6 +13,9 @@ catkin_package(
   CATKIN_DEPENDS ${CATKIN_DEPENDENCIES}
   )
 
+link_directories(${GAZEBO_LIBRARY_DIRS})
+include_directories(${catkin_INCLUDE_DIRS} ${GAZEBO_INCLUDE_DIRS})
+
 ## --------------------------------------------------------------
 ## |                           Install                          |
 ## --------------------------------------------------------------
