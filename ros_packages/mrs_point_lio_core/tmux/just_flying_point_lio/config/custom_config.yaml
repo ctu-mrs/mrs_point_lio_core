@@ -66,7 +66,8 @@ mrs_uav_managers:
           acc: 100.0 # acceleration state
   
         corrections: [
-          "pos_point_lio"
+          "pos_point_lio",
+          "vel_point_lio"
         ]
   
         pos_point_lio:
@@ -83,6 +84,20 @@ mrs_uav_managers:
             enabled: true
             from_frame: "livox"
             to_frame: "fcu" 
+
+          processors: [] # types of processors attached to this measurement
+
+        vel_point_lio:
+          state_id: 1 # 0 - position, 1 - velocity, 2 - acceleration
+          noise: 0.01 # measurement noise covariance (R)
+          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
+          body_frame: false
+          message:
+            type: "nav_msgs/Odometry"
+            topic: "point_lio/odom" # without uav namespace
+            limit: 
+              delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
+              time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
 
           processors: [] # types of processors attached to this measurement
 
@@ -161,6 +176,7 @@ mrs_uav_managers:
 
         corrections: [
           "pos_point_lio",
+          "vel_point_lio"
         ]
 
         pos_point_lio:
@@ -177,6 +193,20 @@ mrs_uav_managers:
             enabled: true
             from_frame: "livox"
             to_frame: "fcu" 
+
+          processors: [] # types of processors attached to this measurement
+
+        vel_point_lio:
+          state_id: 1 # 0 - position, 1 - velocity, 2 - acceleration
+          noise: 0.01 # measurement noise covariance (R)
+          noise_unhealthy_coeff: 100.0 # covariance gets multiplied by this coefficient when correction is unhealthy (R)
+          body_frame: false
+          message:
+            type: "nav_msgs/Odometry"
+            topic: "point_lio/odom" # without uav namespace
+            limit: 
+              delay: 2.0 # [s] messages with higher delay will flag correction as unhealthy
+              time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
 
           processors: [] # types of processors attached to this measurement
 
