@@ -5,15 +5,23 @@
   <arg name="livox_config" default="$(find livox_ros_driver2)/config/MID360_config.json" />
 
   <arg name="livox_frame" default="$(arg UAV_NAME)/livox" />
+  <arg name="livox_frame_pcl" default="$(arg UAV_NAME)/livox_frame" />
   <arg name="fcu_frame" default="$(arg UAV_NAME)/fcu" />
   <arg name="odom_frame" default="$(arg UAV_NAME)/point_lio_odom" />
+  <arg name="world_origin" default="$(arg UAV_NAME)/world_origin" />
+  <arg name="point_lio_origin" default="$(arg UAV_NAME)/point_lio_origin" />
 
   <arg name="livox_frame_slashless" default="livox_$(arg UAV_NAME)" />
+  <arg name="livox_frame_pcl_slashless" default="livox_frame_$(arg UAV_NAME)" />
   <arg name="fcu_frame_slashless" default="fcu_$(arg UAV_NAME)" />
   <arg name="odom_frame_slashless" default="odom_$(arg UAV_NAME)" />
+  <arg name="world_origin_slashless" default="world_origin_$(arg UAV_NAME)" />
+  <arg name="point_lio_origin_slashless" default="point_lio_origin_$(arg UAV_NAME)" />
 
-  <node pkg="tf2_ros" type="static_transform_publisher" name="$(arg odom_frame_slashless)_to_$(arg livox_frame_slashless)" args=" 0 0 0 0 0 0 $(arg odom_frame) $(arg livox_frame)" />
-  <node pkg="tf2_ros" type="static_transform_publisher" name="$(arg livox_frame_slashless)_to_$(arg fcu_frame_slashless)" args=" 0 0 -0.08 0 0.122173 0 $(arg livox_frame) $(arg fcu_frame)" />
+  <!-- <node pkg="tf2_ros" type="static_transform_publisher" name="$(arg odom_frame_slashless)_to_$(arg livox_frame_slashless)" args=" 0 0 0 0 0 0 $(arg odom_frame) $(arg livox_frame)" /> -->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="$(arg livox_frame_slashless)_to_$(arg fcu_frame_slashless)" args=" 0 0 -0.50 0 0 0 $(arg livox_frame) $(arg fcu_frame)" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="$(arg livox_frame_slashless)_to_$(arg livox_frame_pcl_slashless)" args=" 0 0 0 0 0 0 $(arg livox_frame) $(arg livox_frame_pcl)" />
+  <node pkg="tf2_ros" type="static_transform_publisher" name="$(arg point_lio_origin_slashless)_to_$(arg world_origin_slashless)" args=" 0 0 0 0 0 0 $(arg point_lio_origin) $(arg world_origin)" />
 
   <include file="$(find livox_ros_driver2)/launch/mid360.launch">
     <arg name="config" value="$(arg livox_config)" />
