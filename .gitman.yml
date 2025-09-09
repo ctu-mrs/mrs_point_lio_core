@@ -24,7 +24,7 @@ sources:
         target: ros_packages/mrs_point_lio_estimator_plugin
     scripts:
       - git submodule update --init --recursive
-  - repo: git@github.com:ctu-mrs/livox_ros_driver2.git
+  - repo: https://github.com/ctu-mrs/livox_ros_driver2.git
     name: livox_ros_driver2
     rev: master
     type: git
