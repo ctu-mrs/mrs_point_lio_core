@@ -37,19 +37,25 @@ pre_input=""
 input=(
   'Rosbag' 'waitForOffboard; ./record.sh
 '
-  'Sensors' 'waitForTime; roslaunch mrs_uav_deployment sensors.launch
-'
-  'Nimbro' 'waitForTime; rosrun mrs_uav_deployment run_nimbro.py ./config/network_config.yaml `rospack find mrs_uav_deployment`/config/communication_config.yaml
+  'Nimbro' 'waitForTime; rosrun mrs_uav_deployment run_nimbro.py ./config/network_config.yaml
 '
   'HwApi' 'waitForTime; roslaunch mrs_uav_px4_api api.launch
 '
   'Status' 'waitForHw; roslaunch mrs_uav_status status.launch
 '
-  'Core' 'waitForTime; roslaunch mrs_uav_core core.launch platform_config:=`rospack find mrs_uav_deployment`/config/mrs_uav_system/$UAV_TYPE.yaml world_config:=./config/world_config.yaml custom_config:=./config/custom_config.yaml network_config:=./config/network_config.yaml
+  'Core' 'waitForTime; roslaunch mrs_uav_core core.launch\
+    platform_config:=`rospack find mrs_uav_deployment`/config/mrs_uav_system/$UAV_TYPE.yaml\
+    world_config:=./config/world_config.yaml\
+    custom_config:=./config/custom_config.yaml\
+    network_config:=./config/network_config.yaml
 '
   'AutoStart' 'waitForHw; roslaunch mrs_uav_autostart automatic_start.launch
 '
-  'SLAM' 'waitForRos; roslaunch point_lio mid360.launch
+# Launch Livox + Point-LIO + Livox custom msg-type ROS republisher
+  'LIO' 'waitForRos; roslaunch mrs_point_lio_core point_lio_livox_mid360.launch
+'
+# Static extrinsics from Livox to FCU
+  'TF_livox2fcu' 'waitForRos; rosrun tf2_ros static_transform_publisher 0 0 0 0 0 0 '"$UAV_NAME"'/livox_frame '"$UAV_NAME"'/fcu
 '
 # do NOT modify the command list below
   'EstimDiag' 'waitForHw; rostopic echo /'"$UAV_NAME"'/estimation_manager/diagnostics
