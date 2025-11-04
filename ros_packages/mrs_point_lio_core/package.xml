@@ -1,27 +1,26 @@
 <?xml version="1.0"?>
-<package format="2">
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
 
   <name>mrs_point_lio_core</name>
-  <version>1.0.0</version>
-  <description>The MRS Point-LIO core metapackage</description>
+  <version>2.0.0</version>
+  <description>MRS PointLIO core</description>
 
-  <author email="matej.petrlik@fel.cvut.cz">Matej Petrlik</author>
-  <maintainer email="matej.petrlik@fel.cvut.cz">Matej Petrlik</maintainer>
+  <author email="tomas.baca@fel.cvut.cz">Tomas Baca</author>
+  <maintainer email="tomas.baca@fel.cvut.cz">Tomas Baca</maintainer>
 
-  <license>BSD 3-Clause</license>
+  <license>BSD-3</license>
 
-  <buildtool_depend>catkin</buildtool_depend>
-
-  <depend>cmake_modules</depend>
-
+  <depend>point_lio</depend>
   <depend>mrs_point_lio_estimator_plugin</depend>
 
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
   <export>
-    <!-- gazebo_ros_paths_plugin automatically adds these to
-      GAZEBO_PLUGIN_PATH and GAZEBO_MODEL_PATH when you do this export inside
-      the package.xml file. You can than use URIs of type model://my_package/stuff. -->
-    <gazebo_ros gazebo_model_path="${prefix}/models"/>
-    <gazebo_ros gazebo_media_path="${prefix}"/>
+    <build_type>ament_cmake</build_type>
   </export>
 
 </package>

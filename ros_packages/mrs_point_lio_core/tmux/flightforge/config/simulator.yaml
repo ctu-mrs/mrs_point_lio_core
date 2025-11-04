@@ -1,0 +1,89 @@
+uav_names: [
+  "uav1",
+]
+
+frames:
+  fcu:
+    publish_tf: false
+
+uav1:
+
+  frame: "x500"
+  type: "x500"
+  spawn:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    heading: 0.0
+
+mrs_uav_flightforge_simulator:
+
+  sensors:
+
+    lidar:
+
+      enabled: true
+      horizontal_rays: 128 # [-]
+      vertical_rays: 64 # [-]
+      offset_x: 0.0 # [m]
+      offset_y: 0.0 # [m]
+      offset_z: 0.1 # [m]
+      rotation_pitch: 0.0 # [deg]
+      rotation_roll: 0.0 # [deg]
+      rotation_yaw: 0.0 # [deg]
+
+      vertical_fov_down: 10.0
+      vertical_fov_up: 30.0
+
+      rate: 10.0 # [Hz]
+
+      noise:
+
+        enabled: true
+
+        std_at_1m: 0.02 # [m]
+        std_slope: 0.05 # [-] # multiplies std_at_1m for each meter of measured distances
+
+      lidar_segmented:
+        enabled: false
+        rate: 10.0 # [Hz]
+
+      lidar_intensity:
+        enabled: false
+        rate: 10.0 # [Hz]
+
+    rgb:
+
+      enabled: false
+
+      rgb_segmented:
+        enabled: false
+        rate: 10.0 # [Hz]
+
+      depth:
+        enabled: false
+
+    stereo:
+      enabled: false
+      rate: 30.0
+
+  graphics_settings: "medium"
+
+  realtime_factor: 1.0 # [-]
+
+  # world_name: "valley" # works in Lite
+  world_name: "warehouse" # works in Lite
+
+  # TODO
+  # world_name: "cave" # does not work
+  # world_name: "dead_spruce_forest" # does not work
+  # world_name: "infinite_forest" # does not work
+  # world_name: "forest" # does not work
+  # world_name: "service_tunnel" # does not work
+
+  # weather_type: "cloudy"
+
+  daytime:
+
+    hour: 15
+    minute: 30

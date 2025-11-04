@@ -1,0 +1,17 @@
+location: .gitman
+sources:
+  - repo: https://github.com/ctu-mrs/mrs_point_lio_estimator_plugin
+    name: mrs_point_lio_estimator_plugin
+    rev: ros2
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      - source: ''
+        target: ros_packages/mrs_point_lio_estimator_plugin
+    scripts:
+      - git submodule update --init --recursive
+default_group: ''
+groups:
+  -
