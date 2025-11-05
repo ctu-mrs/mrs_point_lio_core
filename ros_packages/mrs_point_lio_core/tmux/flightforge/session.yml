@@ -39,7 +39,7 @@ windows:
   - point_lio:
       layout: tiled
       panes:
-        - ros2 launch point_lio point_lio.launch.py config:=simulation topic_imu:=hw_api/imu topic_pc:=lidar/points custom_config:=./config/point_lio.yaml
+        - ros2 launch point_lio point_lio.launch.py preset:=simulation_plain topic_imu:=hw_api/imu topic_pc:=lidar/points custom_config:=./config/point_lio.yaml
   - takeoff:
       layout: tiled
       panes:

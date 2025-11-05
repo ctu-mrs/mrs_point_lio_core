@@ -6,16 +6,16 @@ mrs_uav_managers:
 
       after_takeoff:
 
-        controller: "Se3Controller"
+        controller: "MpcController"
 
   estimation_manager:
 
     state_estimators: [
-       "point_lio",
        "gps_baro",
+       "point_lio",
     ]
 
-    initial_state_estimator: "point_lio" # will be used as the first state estimator
+    initial_state_estimator: "gps_baro" # will be used as the first state estimator
     agl_height_estimator: "" # only slightly filtered height for checking min height (not used in control feedback)
 
     # namespace of the state estimator
@@ -208,8 +208,8 @@ mrs_uav_managers:
   constraint_manager:
 
     estimator_types: [
+      "point_lio",
       "gps_baro",
-      "point_lio"
     ]
 
     constraints: [
@@ -233,7 +233,7 @@ mrs_uav_managers:
 
     estimator_types: [
       "point_lio",
-      "gps_baro"
+      "gps_baro",
     ]
 
     gains: [
