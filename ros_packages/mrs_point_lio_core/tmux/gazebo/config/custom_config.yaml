@@ -86,7 +86,7 @@ mrs_uav_managers:
               time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
           transform:
             enabled: true
-            from_frame: "lidar"
+            from_frame: "ouster_link"
             to_frame: "fcu"
 
           processors: [] # types of processors attached to this measurement
@@ -139,7 +139,7 @@ mrs_uav_managers:
               time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
           transform:
             enabled: true
-            from_frame: "lidar"
+            from_frame: "ouster_link"
             to_frame: "fcu"
 
           init_hdg_in_zero: false
@@ -183,7 +183,7 @@ mrs_uav_managers:
               time_since_last: 1.0 # [s] larger time step between messages will flag correction as unhealthy
           transform:
             enabled: true
-            from_frame: "lidar"
+            from_frame: "ouster_link"
             to_frame: "fcu"
 
           processors: [] # types of processors attached to this measurement
