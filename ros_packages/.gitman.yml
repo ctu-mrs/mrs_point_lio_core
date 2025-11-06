@@ -9,7 +9,31 @@ sources:
       -
     links:
       - source: ''
-        target: ros_packages/mrs_point_lio_estimator_plugin
+        target: mrs_point_lio_estimator_plugin
+    scripts:
+      - git submodule update --init --recursive
+  - repo: https://github.com/ctu-mrs/point-lio
+    name: point-lio
+    rev: ros2
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      - source: ''
+        target: point-lio
+    scripts:
+      - git submodule update --init --recursive
+  - repo: https://github.com/ctu-mrs/livox_ros_driver2
+    name: livox_ros_driver2
+    rev: ros2
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      - source: ''
+        target: livox_ros_driver2
     scripts:
       - git submodule update --init --recursive
 default_group: ''
