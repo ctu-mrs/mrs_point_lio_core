@@ -7,7 +7,6 @@ Panels:
         - /Global Options1
         - /Status1
         - /livox1
-        - /livox1/Status1
         - /Path1/Topic1
       Splitter Ratio: 0.5
     Tree Height: 1878
@@ -147,7 +146,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 143; 143; 143
-    Fixed Frame: livox_frame
+    Fixed Frame: uav1/livox
     Frame Rate: 30
   Name: root
   Tools:
