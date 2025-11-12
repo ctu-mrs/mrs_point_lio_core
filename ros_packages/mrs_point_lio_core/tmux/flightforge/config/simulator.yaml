@@ -23,17 +23,12 @@ mrs_uav_flightforge_simulator:
     lidar:
 
       enabled: true
-      horizontal_rays: 128 # [-]
+      livox: false
+      horizontal_rays: 256 # [-]
       vertical_rays: 64 # [-]
-      offset_x: 0.0 # [m]
-      offset_y: 0.0 # [m]
-      offset_z: 0.1 # [m]
-      rotation_pitch: 0.0 # [deg]
-      rotation_roll: 0.0 # [deg]
-      rotation_yaw: 0.0 # [deg]
 
-      vertical_fov_down: 10.0
-      vertical_fov_up: 30.0
+      vertical_fov_down: 45.0
+      vertical_fov_up: 45.0
 
       rate: 10.0 # [Hz]
 
@@ -54,7 +49,8 @@ mrs_uav_flightforge_simulator:
 
     rgb:
 
-      enabled: false
+      enabled: true
+      rate: 15.0
 
       rgb_segmented:
         enabled: false

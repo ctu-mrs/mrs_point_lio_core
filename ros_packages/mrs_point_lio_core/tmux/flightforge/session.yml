@@ -49,6 +49,10 @@ windows:
       layout: tiled
       panes:
         - ros2 launch stereo_image_proc stereo_image_proc.launch.py namespace:=uav1/stereo
+  - mapping:
+      layout: tiled
+      panes:
+        - ros2 launch mrs_octomap_server octomap.launch.py custom_config:=./config/octomap_server.yaml lidar_3d_0:=lidar/points
   # - static_tfs:
   #     layout: tiled
   #     panes:
