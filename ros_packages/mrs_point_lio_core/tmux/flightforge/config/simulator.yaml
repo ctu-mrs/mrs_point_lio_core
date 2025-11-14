@@ -36,8 +36,8 @@ mrs_uav_flightforge_simulator:
 
         enabled: true
 
-        std_at_1m: 0.02 # [m]
-        std_slope: 0.05 # [-] # multiplies std_at_1m for each meter of measured distances
+        # std_at_1m: 0.02 # [m]
+        # std_slope: 0.05 # [-] # multiplies std_at_1m for each meter of measured distances
 
       lidar_segmented:
         enabled: false
@@ -68,13 +68,13 @@ mrs_uav_flightforge_simulator:
   realtime_factor: 1.0 # [-]
 
   # world_name: "valley" # works in Lite
-  # world_name: "warehouse" # works in Lite
+  world_name: "warehouse" # works in Lite
 
   # TODO
   # world_name: "cave" # does not work
   # world_name: "dead_spruce_forest" # does not work
   # world_name: "infinite_forest" # does not work
-  world_name: "forest" # does not work
+  # world_name: "forest" # does not work
   # world_name: "service_tunnel" # does not work
 
   # weather_type: "cloudy"

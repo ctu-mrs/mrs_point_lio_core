@@ -12,7 +12,7 @@ safety_area:
   horizontal:
 
     # the frame of reference in which the points are expressed
-    frame_name: "world_origin"
+    frame_name: "fixed_origin"
 
     # polygon
     #
@@ -28,7 +28,7 @@ safety_area:
   vertical:
 
     # the frame of reference in which the max&min z is expressed
-    frame_name: "world_origin"
+    frame_name: "fixed_origin"
 
     max_z: 15.0
     min_z: 0.5
