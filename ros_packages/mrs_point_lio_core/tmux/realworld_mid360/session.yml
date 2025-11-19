@@ -26,7 +26,11 @@ windows:
   - mapping:
       layout: tiled
       panes:
-        - ros2 launch mrs_octomap_server octomap.launch.py custom_config:=./config/octomap_server.yaml lidar_3d_0:=livox/points lidar_3d_0_free:=livox/invalid_points
+        - ros2 launch mrs_octomap_server octomap.launch.py custom_config:=./config/octomap_server.yaml lidar_3d_0:=livox/points lidar_3d_0_free:=livox/invalid_points world_frame:=$UAV_NAME/point_lio_origin
+  - record:
+      layout: tiled
+      panes:
+        - mkdir -p ~/bag_files/latest; ./record.sh
   - tf:
       layout: tiled
       panes:
