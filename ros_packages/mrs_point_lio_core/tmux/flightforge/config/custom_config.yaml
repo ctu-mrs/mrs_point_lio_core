@@ -288,3 +288,8 @@ mrs_uav_managers:
         enabled: false
       republish_in_frames: [] # the odometry message will be transformed and republished in the specified frames
       utm_based: false # if true, will publish tf to utm_origin
+
+mrs_uav_autostart:
+
+  # countdown between entering offboard and the takeoff (default 5 s)
+  takeoff_countdown: 1.0 # [s]
