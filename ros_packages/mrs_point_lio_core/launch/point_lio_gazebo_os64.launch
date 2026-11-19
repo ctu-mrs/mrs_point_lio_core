@@ -10,6 +10,15 @@
   <arg name="node_name"      default="point_lio" />
   <arg name="name_postfix"   default="" />
 
+  <!-- input topics -->
+  <arg name="lidar_topic"    default="/$(arg UAV_NAME)/os_cloud_nodelet/points" />
+  <arg name="imu_topic"      default="/$(arg UAV_NAME)/os_cloud_nodelet/imu" />
+
+  <!-- IMU as the input of the propagation (1) or as a measurement (0) -->
+  <arg name="use_imu_as_input" default="1" />
+  <!-- keep every N-th point of the scan -->
+  <arg name="point_filter_num" default="1" />
+
   <!-- Debug? -->
   <arg     if="$(arg debug)" name="launch_prefix" value="valgrind --tool=callgrind" />
   <arg unless="$(arg debug)" name="launch_prefix" value="" />
@@ -33,13 +42,17 @@
 
     	<rosparam if="$(eval not arg('custom_config') == '')" file="$(arg custom_config)" command="load" />
 
+      <!-- ======================= subscribers ====================== -->
+      <param name="common/lid_topic" type="string" value="$(arg lidar_topic)" />
+      <param name="common/imu_topic" type="string" value="$(arg imu_topic)" />
+
     	<!-- ======================= parameters ======================= -->
       <param name="uav_name" type="string" value="$(arg UAV_NAME)"/>
-      <param name="use_imu_as_input" type="bool" value="0"/> <!--change to 1 to use IMU as input of Point-LIO-->
+      <param name="use_imu_as_input" type="bool" value="$(arg use_imu_as_input)"/>
       <param name="prop_at_freq_of_imu" type="bool" value="1"/>
       <param name="check_satu" type="bool" value="1"/>
       <param name="init_map_size" type="int" value="10"/>
-      <param name="point_filter_num" type="int" value="4"/> <!--4, 3--> 
+      <param name="point_filter_num" type="int" value="$(arg point_filter_num)"/>
       <param name="space_down_sample" type="bool" value="1" />  
       <param name="filter_size_surf" type="double" value="0.5" /> <!--0.5, 0.3, 0.2, 0.15, 0.1--> 
       <param name="filter_size_map" type="double" value="0.5" /> <!--0.5, 0.3, 0.15, 0.1-->
@@ -52,10 +65,6 @@
     	<!-- <param name="filter_size_surf"       type="double" value="0.3" /> 0.5, 0.3, 0.2, 0.15, 0.1  -->
     	<!-- <param name="filter_size_map"        type="double" value="0.2" /> 0.5, 0.3, 0.15, 0.1 -->
       
-      <!-- ======================= subscribers ====================== -->
-      <remap from="/livox/lidar" to="/$(arg UAV_NAME)/os_cloud_nodelet/points" />
-      <remap from="/livox/imu" to="/$(arg UAV_NAME)/os_cloud_nodelet/imu" />
-
       <!-- ======================= publishers ======================= -->
       <remap from="/cloud_registered" to="~cloud_registered" />
       <remap from="/cloud_registered_body" to="~cloud_registered_body" />
